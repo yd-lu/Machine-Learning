@@ -3,7 +3,8 @@
 ## Table of Contents
 - [How to deal with missing values](#How-to-deal-with-missing-values)
 - [Which type of model with which type of data](#Which-type-of-model-with-which-type-of-data)
-- [Python Code Examples](#python-code-examples)
+- [One-Hot and Label Encoding](#One-Hot-and-Label-Encoding)
+- [p >> n](#p->>-n)
 
 
 
@@ -50,13 +51,15 @@ You're aiming to keep the data as representative and unbiased as possible. The m
 ## One-Hot and Label Encoding
 
 🔵 One-Hot Encoding
+✅ drop_first=True avoids multicollinearity (for linear models).
 
 ```import pandas as pd
 
 df = pd.DataFrame({'Color': ['Red', 'Green', 'Blue', 'Green', 'Red']})
 df_onehot = pd.get_dummies(df, columns=['Color'], drop_first=True)
 
-print(df_onehot)```
+print(df_onehot)
+```
 
 or
 
@@ -67,11 +70,12 @@ encoder = OneHotEncoder(drop='first', sparse=False)
 encoded = encoder.fit_transform(df[['Color']])
 encoded_df = pd.DataFrame(encoded, columns=encoder.get_feature_names_out())
 
-print(encoded_df)```
-
-✅ drop_first=True avoids multicollinearity (for linear models).
+print(encoded_df)
+```
 
 🔵 Label Encoding
+🚨 Be careful : LabelEncoder assigns arbitrary numbers, so for linear/KNN models it can introduce fake orderings like: Green < Red < Blue — which can mess up performance. Should be avoided when the notion of "distance" between points is important for the model.
+
 ```
 from sklearn.preprocessing import LabelEncoder
 
@@ -79,9 +83,8 @@ df = pd.DataFrame({'Color': ['Red', 'Green', 'Blue', 'Green', 'Red']})
 le = LabelEncoder()
 df['Color_encoded'] = le.fit_transform(df['Color'])
 
-print(df)```
-
-🚨 Be careful : LabelEncoder assigns arbitrary numbers, so for linear/KNN models it can introduce fake orderings like: Green < Red < Blue — which can mess up performance. Should be avoided when the notion of "distance" between points is important for the model.
+print(df)
+```
 
 
 
