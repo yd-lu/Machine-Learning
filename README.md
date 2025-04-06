@@ -43,3 +43,91 @@ You're aiming to keep the data as representative and unbiased as possible. The m
 | Ordinal Encoding | Ordered categories             | Map with order (e.g., low/med/high)   | Ordinal features | Unordered categories |
 | Target Encoding  | High-cardinality, with caution | Encode using mean target per category | Power users      | Small datasets       |
 | Embeddings       | Neural networks                | Learn dense vector per category       | Deep models      | Simple models        |
+
+
+
+
+## One-Hot and Label Encoding
+
+🔵 One-Hot Encoding
+
+```import pandas as pd
+
+df = pd.DataFrame({'Color': ['Red', 'Green', 'Blue', 'Green', 'Red']})
+df_onehot = pd.get_dummies(df, columns=['Color'], drop_first=True)
+
+print(df_onehot)```
+
+or
+
+```
+from sklearn.preprocessing import OneHotEncoder
+
+encoder = OneHotEncoder(drop='first', sparse=False)
+encoded = encoder.fit_transform(df[['Color']])
+encoded_df = pd.DataFrame(encoded, columns=encoder.get_feature_names_out())
+
+print(encoded_df)```
+
+✅ drop_first=True avoids multicollinearity (for linear models).
+
+🔵 Label Encoding
+```
+from sklearn.preprocessing import LabelEncoder
+
+df = pd.DataFrame({'Color': ['Red', 'Green', 'Blue', 'Green', 'Red']})
+le = LabelEncoder()
+df['Color_encoded'] = le.fit_transform(df['Color'])
+
+print(df)```
+
+🚨 Be careful : LabelEncoder assigns arbitrary numbers, so for linear/KNN models it can introduce fake orderings like: Green < Red < Blue — which can mess up performance. Should be avoided when the notion of "distance" between points is important for the model.
+
+
+
+
+## p >> n
+
+
+### 🚨 Why High Dimensionality (p >> n) Is a Problem
+
+| Problem              | What It Means                                                              |
+|----------------------|----------------------------------------------------------------------------|
+| Overfitting          | Model learns noise instead of signal                                       |
+| Multicollinearity    | Features are linearly dependent, especially after One-Hot                  |
+| Computational cost   | Training becomes slow, models can crash                                    |
+| Poor generalization  | Good training accuracy but bad test accuracy                               |
+| Singular matrices    | Matrix inversion fails in linear regression due to too many features       |
+
+
+
+### 🎯 Model Handling When p >> n
+
+| Model              | Issue with p >> n           | What to Do                                  | Affects Which Data                | Advantages                          | Disadvantages                        |
+|--------------------|-----------------------------|---------------------------------------------|-----------------------------------|--------------------------------------|--------------------------------------|
+| Linear Regression  | Overfitting, unstable        | Use **Ridge** (L2) or **Lasso** (L1)         | Categorical (One-Hot), All        | Regularizes, prevents overfitting   | Lasso can drop useful features       |
+| Logistic Regression| Same as above                | Regularized Logistic (L1/L2)                | Same                               | Better classification boundaries    | Same issues                          |
+| KNN                | Curse of dimensionality      | **Feature selection** or **PCA**            | All features                       | Reduces noise                       | PCA hard to interpret                |
+| SVM                | Slower, overfit              | Kernel SVM with **regularization**          | All                                | Can handle high-dim if tuned        | Expensive in high dimensions         |
+| XGBoost / LightGBM | Handles p >> n better        | **Feature selection**, Label Encoding       | High-cardinality categoricals      | Handles irrelevant features well    | Slower training                      |
+| Random Forest      | Same as above                | Label Encoding or feature selection         | Categorical                        | Built-in feature importance         | Memory heavy                         |
+| Neural Nets        | Overfitting, long training   | Use **Dropout**, **Regularization**, Embeddings | One-Hot categories            | Powerful and flexible               | Needs lots of data                   |
+| Naive Bayes        | OK with high p               | Drop irrelevant features                    | Text / Categorical                 | Fast and simple                     | Assumes independence                 |
+
+
+### ⚙️ Techniques to Deal with High-Dimensional Data
+
+| Technique        | Description                               | Best For         | Pros                           | Cons                           |
+|------------------|-------------------------------------------|------------------|--------------------------------|--------------------------------|
+| Lasso (L1)       | Shrinks and sets some coefficients to 0   | Linear models    | Performs feature selection     | May drop useful features       |
+| Ridge (L2)       | Shrinks coefficients                      | Linear models    | Keeps all features             | No sparsity                    |
+| ElasticNet       | Combines L1 and L2                        | Linear models    | Best of both worlds            | Needs tuning                   |
+| PCA              | Reduces dimensions using projection       | KNN, SVM         | Reduces dimensionality         | Less interpretable             |
+| SelectKBest      | Keeps top-k important features            | Any model        | Fast, easy to use              | Might drop subtle features     |
+| VarianceThreshold| Drops low-variance features               | Any model        | Simple                         | Might remove useful features   |
+| Embeddings       | Dense vectors for categories              | Deep learning    | Compact and powerful           | Needs training                 |
+| Hashing Trick    | Hashes categories to fixed size           | Text, Categorical| Very memory-efficient          | Risk of collisions             |
+
+
+
+
