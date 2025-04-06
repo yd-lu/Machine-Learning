@@ -1,7 +1,7 @@
 # Machine-Learning
 
 ## Table of Contents
-- [How to deal with missing values](###How to deal with missing values)
+- [How to deal with missing values](#How to deal with missing values)
 - [Data Analysis Techniques](#data-analysis-techniques)
 - [Python Code Examples](#python-code-examples)
 
@@ -16,6 +16,6 @@ You're aiming to keep the data as representative and unbiased as possible. The m
 def greet(name):
     print(f"Hello, {name}!")
 
-greet("Alice")
+greet("Alice")```
 
 i finish
