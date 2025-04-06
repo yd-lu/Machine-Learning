@@ -16,4 +16,6 @@ You're aiming to keep the data as representative and unbiased as possible. The m
 def greet(name):
     print(f"Hello, {name}!")
 
-greet("Alice")'''
+greet("Alice")
+
+i finish
