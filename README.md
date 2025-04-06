@@ -11,7 +11,8 @@
 You're aiming to keep the data as representative and unbiased as possible. The method chosen should not change the data distribution too much.
 + Methods : ffill, bfill, fill by mean, fill by median, dropna
 + Time series : prioritize ffill. 
-+ | % Missing | What You Might Do                                                                 |
++
+| % Missing | What You Might Do                                                                 |
 |-----------|------------------------------------------------------------------------------------|
 | < 5%      | Probably safe to fill or drop rows                                                 |
 | 5–15%     | Imputation usually fine, especially if column is important                         |
