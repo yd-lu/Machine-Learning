@@ -51,9 +51,11 @@ You're aiming to keep the data as representative and unbiased as possible. The m
 ## One-Hot and Label Encoding
 
 🔵 One-Hot Encoding
+
 ✅ drop_first=True avoids multicollinearity (for linear models).
 
-```import pandas as pd
+```
+import pandas as pd
 
 df = pd.DataFrame({'Color': ['Red', 'Green', 'Blue', 'Green', 'Red']})
 df_onehot = pd.get_dummies(df, columns=['Color'], drop_first=True)
@@ -74,6 +76,7 @@ print(encoded_df)
 ```
 
 🔵 Label Encoding
+
 🚨 Be careful : LabelEncoder assigns arbitrary numbers, so for linear/KNN models it can introduce fake orderings like: Green < Red < Blue — which can mess up performance. Should be avoided when the notion of "distance" between points is important for the model.
 
 ```
