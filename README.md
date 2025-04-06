@@ -13,51 +13,14 @@ You're aiming to keep the data as representative and unbiased as possible. The m
 + < 5% Missing : probably safe to fill or drop rows. >30%	Often better to drop the column (if not essential).
 
 ### Which type of model with which type of data
-
-import pandas as pd
-
-data = {
-    "Model": [
-        "Linear Regression", "Logistic Regression", "KNN", "Decision Trees",
-        "Random Forest", "XGBoost / LightGBM", "SVM", "Neural Nets", "Naive Bayes"
-    ],
-    "Quantitative Data": ["✓"] * 9,
-    "Categorical Data": ["❌", "❌", "❌", "✓", "✓", "✓", "❌", "❌", "✓"],
-    "How to Handle Categorical": [
-        "One-Hot Encoding",
-        "One-Hot Encoding",
-        "One-Hot or Ordinal",
-        "Raw labels or Ordinal",
-        "Raw labels or Ordinal",
-        "Label Encoding or raw (if supported)",
-        "One-Hot Encoding",
-        "Embeddings or One-Hot",
-        "Label Encoding / raw"
-    ],
-    "Advantages": [
-        "Simple, fast, interpretable",
-        "Probabilistic, interpretable",
-        "No training phase, simple logic",
-        "Handles mixed data well",
-        "Robust, handles noise",
-        "Fast, accurate, missing-value tolerant",
-        "Good in high dimensions",
-        "Flexible, powerful",
-        "Handles categorical features well"
-    ],
-    "Disadvantages": [
-        "Needs scaled data, can't handle categories directly",
-        "Same as above",
-        "Sensitive to scaling and distance distortions",
-        "Can overfit",
-        "Slower with many trees",
-        "Encoding still affects performance",
-        "Slow on large data, needs scaling",
-        "Needs more data, complex tuning",
-        "Strong independence assumption"
-    ]
-}
-
-model_feature_df = pd.DataFrame(data)
-print(model_feature_df.to_markdown(index=False))
-
+| Model               | Quantitative Data   | Categorical Data   | How to Handle Categorical            | Advantages                             | Disadvantages                                       |
+|:--------------------|:--------------------|:-------------------|:-------------------------------------|:---------------------------------------|:----------------------------------------------------|
+| Linear Regression   | ✓                   | ❌                 | One-Hot Encoding                     | Simple, fast, interpretable            | Needs scaled data, can't handle categories directly |
+| Logistic Regression | ✓                   | ❌                 | One-Hot Encoding                     | Probabilistic, interpretable           | Same as above                                       |
+| KNN                 | ✓                   | ❌                 | One-Hot or Ordinal                   | No training phase, simple logic        | Sensitive to scaling and distance distortions       |
+| Decision Trees      | ✓                   | ✓                  | Raw labels or Ordinal                | Handles mixed data well                | Can overfit                                         |
+| Random Forest       | ✓                   | ✓                  | Raw labels or Ordinal                | Robust, handles noise                  | Slower with many trees                              |
+| XGBoost / LightGBM  | ✓                   | ✓                  | Label Encoding or raw (if supported) | Fast, accurate, missing-value tolerant | Encoding still affects performance                  |
+| SVM                 | ✓                   | ❌                 | One-Hot Encoding                     | Good in high dimensions                | Slow on large data, needs scaling                   |
+| Neural Nets         | ✓                   | ❌                 | Embeddings or One-Hot                | Flexible, powerful                     | Needs more data, complex tuning                     |
+| Naive Bayes         | ✓                   | ✓                  | Label Encoding / raw                 | Handles categorical features well      | Strong independence assumption                      |
