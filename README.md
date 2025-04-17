@@ -157,12 +157,12 @@ Overfitting in linear regression means your model is “learning” noise rather
   – Split your data (e.g. k‑fold CV) and monitor training vs. validation error. A big gap ⇒ overfitting.
   – Use learning curves (plot error vs. training set size) to see if more data would help.
 
-Regularize
+- Regularize
   – Ridge regression (L₂ penalty) shrinks coefficients toward zero
   – Lasso (L₁ penalty) can drive some coefficients exactly to zero (feature selection)
   – Elastic Net blends both L₁ and L₂—tune the mix to balance shrinkage vs. sparsity.
 
-Simplify Your Feature Set
+- Simplify Your Feature Set
   – Remove weak or highly correlated predictors. Too many features relative to samples invites noise‑fitting.
   – Dimensionality reduction (e.g., PCA) to capture most variance in fewer components.
 
