@@ -5,6 +5,7 @@
 - [Which type of model with which type of data](#Which-type-of-model-with-which-type-of-data)
 - [One-Hot and Label Encoding](#One-Hot-and-Label-Encoding)
 - [p >> n](#p->>-n)
+- [Gradient Boosting](#Gradient-Boosting)
 
 
 
@@ -136,4 +137,13 @@ print(df)
 
 
 
+## Gradient Boosting
+### Principles
+Gradient Boosting is a ensemble learning method. It is a boosting algorithm which combine multiple weak learner to create a strong predictive model. In gradient boosting each new model is trained to minimize the loss function such as mean squared error of the previous model using gradient descent. In each iteration the algorithm computes the gradient of the loss function with respect to the predictions and then trains a new weak model to minimize this gradient. **If Loss = MSE, then gradient = -2(residul)**
+
+After each tree is trained its predictions are shrunk by multiplying them with the learning rate η (which ranges from 0 to 1). This prevents overfitting by ensuring each tree has a smaller impact on the final model.
+
+Once all trees are trained predictions are made by summing the contributions of all the trees. The final prediction is given by the formula:
+$$y_{pred} = y_0(initial prediction) + \eta(r_1+...r_N)$$
+where $r_i$ are the residuals (errors) predicted by each tree.
 
