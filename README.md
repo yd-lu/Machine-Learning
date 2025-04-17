@@ -139,7 +139,7 @@ print(df)
 
 ## Gradient Boosting
 ### Principles
-Gradient Boosting is a ensemble learning method. It is a boosting algorithm which combine multiple weak learner to create a strong predictive model. In gradient boosting each new model is trained to minimize the loss function such as mean squared error of the previous model using gradient descent. In each iteration the algorithm computes the gradient of the loss function with respect to the predictions and then trains a new weak model to minimize this gradient. **If Loss = MSE, then gradient = -2(residul)**
+Gradient Boosting is an ensemble learning method. It is a boosting algorithm which combine multiple weak learners to create a strong predictive model. In gradient boosting each new model is trained to minimize the loss function such as mean squared error of the previous model using gradient descent. In each iteration the algorithm computes the gradient of the loss function with respect to the predictions and then trains a new weak model to minimize this gradient. **If Loss = MSE, then gradient = -2(residul)**
 
 After each tree is trained its predictions are shrunk by multiplying them with the learning rate η (which ranges from 0 to 1). This prevents overfitting by ensuring each tree has a smaller impact on the final model.
 
