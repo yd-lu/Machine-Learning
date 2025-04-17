@@ -6,6 +6,7 @@
 - [One-Hot and Label Encoding](#One-Hot-and-Label-Encoding)
 - [p >> n](#p->>-n)
 - [Gradient Boosting](#Gradient-Boosting)
+- [How to deal with overfitting linear regression](#How-to-deal-with-overfitting-linear-regression)
 
 
 
@@ -146,4 +147,22 @@ After each tree is trained its predictions are shrunk by multiplying them with t
 Once all trees are trained predictions are made by summing the contributions of all the trees. The final prediction is given by the formula:
 $$y_{pred} = y_0(initial prediction) + \eta(r_1+...r_N)$$
 where $r_i$ are the residuals (errors) predicted by each tree.
+
+
+## How to deal with overfitting linear regression
+
+Overfitting in linear regression means your model is “learning” noise rather than the true underlying relationship. Here’s how to tackle it head‑on:
+
+- Diagnose with Cross‑Validation
+  – Split your data (e.g. k‑fold CV) and monitor training vs. validation error. A big gap ⇒ overfitting.
+  – Use learning curves (plot error vs. training set size) to see if more data would help.
+
+Regularize
+  – Ridge regression (L₂ penalty) shrinks coefficients toward zero
+  – Lasso (L₁ penalty) can drive some coefficients exactly to zero (feature selection)
+  – Elastic Net blends both L₁ and L₂—tune the mix to balance shrinkage vs. sparsity.
+
+Simplify Your Feature Set
+  – Remove weak or highly correlated predictors. Too many features relative to samples invites noise‑fitting.
+  – Dimensionality reduction (e.g., PCA) to capture most variance in fewer components.
 
