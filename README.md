@@ -8,7 +8,7 @@
 - [Gradient Boosting](#Gradient-Boosting)
 - [How to deal with overfitting linear regression](#How-to-deal-with-overfitting-linear-regression)
 - [t-test and F-test](t-test-and-F-test)
-- 
+- [Homoscedasticity and heteroscedasticity](Homoscedasticity-and-heteroscedasticity)
 
 
 
@@ -253,12 +253,8 @@ Reject H₀ if:
 ## Homoscedasticity and heteroscedasticity
 
 **Homoscedasticity** assumes constant error variance, which underpins the classic OLS standard‐error formulas. 
-```text
-Var(\epsilon_i | X_i) = \sigma^2  \forall i\in \{1,...,n\}.
-```
+$$Var(\epsilon_i | X_i) = \sigma^2  \forall i\in \{1,...,n\}.$$
 **Heteroscedasticity** means the error variance changes with predictors—OLS estimates remain unbiased but inference (t‑tests and confidence intervals) is invalid because the usual variance formulas are wrong.
-```text
-Var(\epsilon_i | X_i) = \sigma_i^2,  \sigma_i^2 \not= constant.
-```
+$$Var(\epsilon_i | X_i) = \sigma_i^2,  \sigma_i^2 \not= constant.$$
 
 When heteroscedasticity is present, I can switch to weighted least squares, weighting observations by the inverse of their estimated variance to restore efficiency and correct inference..
