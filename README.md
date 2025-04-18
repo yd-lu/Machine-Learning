@@ -202,7 +202,7 @@ Under H₀,
 (degrees of freedom = `n-p`, where `p` includes the intercept).  
 Reject H₀ if:  
 - `|t_j| > t_{n-p;1-α/2]`, or  
-- p-value `< α`.
+- p-value `< α`. $t= \pm 1.96$ corresponds to $p =0.05$
 
 ## Interview tip  
 > “We look at each coefficient’s t‑statistic to see if that feature significantly adds explanatory power. In a quant setting, this helps us decide which factors to include in our predictive model.”
