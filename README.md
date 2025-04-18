@@ -191,7 +191,7 @@ Test whether a single predictor `x_j` has any explanatory power once you’ve co
  t_j = beta_hat_j / SE(beta_hat_j)
  SE(beta_hat_j) = sqrt( sigma_hat^2 * (X^T X)^(-1)_[jj] )
 ```  
-- `sigma_hat^2` is the residual variance estimate.  
+- `sigma_hat^2 = SSE/(n-p)` is the residual variance estimate, `p` = number of parameters (including intercept).  
 - `(X^T X)^(-1)_[jj]` is the j-th diagonal element of `(X^T X)^(-1)`.
 
 ## Distribution and decision rule  
