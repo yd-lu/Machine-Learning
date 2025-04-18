@@ -172,3 +172,102 @@ Overfitting in linear regression means your model is “learning” noise rather
   
   – Dimensionality reduction (e.g., PCA) to capture most variance in fewer components.
 
+
+
+## t-test and F-test
+
+## t‑Test for an Individual Coefficient
+
+## Purpose
+Test whether a single predictor $x_j$ has any explanatory power once you’ve controlled for the other variables.
+
+## Null hypothesis
+
+- **H₀:** $\beta_j = 0$ (no linear relationship between `x_j` and `y`, given the other regressors)  
+- **H₁:** `\beta_j ≠ 0`
+
+## Test statistic
+
+\[
+ t_j = \frac{\hat{\beta}_j}{\mathrm{SE}(\hat{\beta}_j)},
+\]
+
+where
+
+\[
+ \mathrm{SE}(\hat{\beta}_j)
+ = \sqrt{\hat{\sigma}^2\,(X^\top X)^{-1}_{jj}},
+\]
+
+- \(\hat{\sigma}^2\) is the residual variance estimate.  
+- \((X^\top X)^{-1}_{jj}\) is the \(j\)-th diagonal element of the inverse.
+
+## Distribution and decision rule
+
+Under H₀,  
+\(t_j \sim t_{n-p}\) (degrees of freedom = \(n-p\), where \(p\) includes the intercept).  
+Reject H₀ if:
+
+- \(|t_j| > t_{n-p; 1-\alpha/2}\), or  
+- the p‑value \(<\alpha\).
+
+## Interview tip
+
+> “We look at each coefficient’s t‑statistic to see if that feature significantly adds explanatory power. In a quant setting, this helps us decide which factors to include in our predictive model.”
+
+---
+
+# F‑Test for Overall Model Fit
+
+## Purpose
+Test whether at least one predictor in your model has explanatory power (i.e., whether the regression as a whole is meaningful).
+
+## Null hypothesis
+
+- **H₀:** `β₁ = β₂ = … = β_{p-1} = 0` (no linear relationship whatsoever)  
+- **H₁:** at least one `β_j ≠ 0`
+
+## Test statistic
+
+\[
+ F = \frac{\mathrm{SSR}/(p-1)}{\mathrm{SSE}/(n-p)}
+   = \frac{(R^2/(p-1))}{((1-R^2)/(n-p))},
+\]
+
+where:
+- SSR = regression sum of squares.  
+- SSE = error sum of squares.  
+- \(R^2\) = coefficient of determination.  
+- \(p\) = number of parameters (including intercept).
+
+## Distribution and decision rule
+
+Under H₀,  
+\(F \sim F_{p-1,\,n-p}\).  
+Reject H₀ if:
+
+- \(F > F_{p-1,\,n-p;1-\alpha}\), or  
+- the p‑value \(<\alpha\).
+
+## Interview tip
+
+> “The F‑test tells us if our model collectively explains variance in the dependent variable. In a quant research context, this is a quick check on whether any of our candidate factors—taken together—have predictive value before we dive deeper into individual t‑tests or out‑of‑sample backtests.”
+
+---
+
+# Putting It Together
+
+> “In linear regression, I use a **t‑test** on each coefficient `β̂_j` to see if that single factor has a statistically significant relationship with the target—rejecting H₀: `β_j=0` if the t‑statistic’s p‑value is below my chosen `α`. Then I perform an **F‑test** on the whole model to ensure that, as a group, the regressors explain a non‑zero fraction of variance—rejecting H₀: `β₁=…=β_{p-1}=0` if the F‑statistic is large enough. Together, these tests guide factor selection and give confidence that the model is not just fitting noise.”
+
+---
+
+# Residual Variance
+
+The unbiased estimator for the error variance is:
+
+\[
+ \hat{\sigma}^2 = \frac{\mathrm{SSE}}{n - p}.
+\]
+
+
+
