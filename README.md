@@ -270,15 +270,15 @@ Random Forest feature importances quantify how much each predictor contributes t
   importance_data[node.feature] += (
     node.weighted_n_node_samples * node.impurity —       
     left.weighted_n_node_samples * left.impurity — 
-    right.weighted_n_node_samples * right.impurity
-)
-```
+    right.weighted_n_node_samples * right.impurity)
+  ```
 
 - For each feature, you sum up all those reductions in MSE across every split in every tree where that feature was used.
 
 - Normalize these sums so they add up to 1. The result is the vector $[I_1,..,I_p]$ where $I_j$ is the importance of feature $j$.
 
-- **Example** | Feature  | Importance (\%) |
+- **Example**
+| Feature  | Importance (\%) |
 |:--------:|---------------:|
 | lag_1    |           78.9 |
 | lag_2    |           9.5  |
