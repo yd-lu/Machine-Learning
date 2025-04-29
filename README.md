@@ -277,7 +277,7 @@ Random Forest feature importances quantify how much each predictor contributes t
 
 - Normalize these sums so they add up to 1. The result is the vector $[I_1,..,I_p]$ where $I_j$ is the importance of feature $j$.
 
-- **Example**
+- **Example** : We are preforming a prediction of total's stock price by using the previous prices.
   
 | Feature | Importance (%) |
 |:--------|---------------:|
