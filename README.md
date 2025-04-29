@@ -9,6 +9,7 @@
 - [How to deal with overfitting linear regression](#How-to-deal-with-overfitting-linear-regression)
 - [t-test and F-test](t-test-and-F-test)
 - [Homoscedasticity and heteroscedasticity](Homoscedasticity-and-heteroscedasticity)
+- [Random Forest feature importances](Random-Forest-feature-importances)
 
 
 
@@ -258,3 +259,41 @@ $$Var(\epsilon_i | X_i) = \sigma^2  \forall i\in \{1,...,n\}.$$
 $$Var(\epsilon_i | X_i) = \sigma_i^2,  \sigma_i^2 \not= constant.$$
 
 When heteroscedasticity is present, I can switch to weighted least squares, weighting observations by the inverse of their estimated variance to restore efficiency and correct inference..
+
+
+## Random Forest feature importances
+
+Random Forest feature importances quantify how much each predictor contributes to reducing prediction error across all the trees in the forest. For regression trees (as in our example), the most common measure is the Mean Decrease in Impurity (MDI):
+
+- At each split in each decision tree, the algorithm chooses the feature and split‐point that most reduces the node’s mean‐squared error (MSE).
+  ```
+  importance_data[node.feature] += (
+    node.weighted_n_node_samples * node.impurity —       
+    left.weighted_n_node_samples * left.impurity — 
+    right.weighted_n_node_samples * right.impurity
+)
+```
+
+- For each feature, you sum up all those reductions in MSE across every split in every tree where that feature was used.
+
+- Normalize these sums so they add up to 1. The result is the vector $[I_1,..,I_p]$ where $I_j$ is the importance of feature $j$.
+
+- **Example** | Feature  | Importance (\%) |
+|:--------:|---------------:|
+| lag_1    |           78.9 |
+| lag_2    |           9.5  |
+| lag_3    |           3.0  |
+| lag_7    |           3.8  |
+| time     |           4.8  |
+Interpretation: ``lag_1`` (the previous day’s value) explains nearly 80 % of the model’s total impurity reduction, so it’s by far the most predictive. The calendar feature time comes in last.
+
+- Why it matters
+
+  - Model insight: You immediately see which lags or external features drive your forecasts.
+
+  - Feature selection: You could drop very low‐importance variables to simplify the model.
+
+  - Diagnostics: If you expect ``seasonal_dummy`` or a macro variable to matter but see near-zero importance, it signals a mismatch.
+ 
+- In practice, you can also compute permutation importances—which measure how much shuffling values of each feature degrades out-of-sample accuracy—to get a more robust picture, especially when features are correlated.
+
