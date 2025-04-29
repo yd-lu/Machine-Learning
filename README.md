@@ -279,12 +279,12 @@ Random Forest feature importances quantify how much each predictor contributes t
 
 - **Example**
 | Feature  | Importance (\%) |
-|:--------:|---------------:|
-| lag_1    |           78.9 |
-| lag_2    |           9.5  |
-| lag_3    |           3.0  |
-| lag_7    |           3.8  |
-| time     |           4.8  |
+|:--------:|:---------------:|
+| lag_1    |            78.9 |
+| lag_2    |            9.5  |
+| lag_3    |            3.0  |
+| lag_7    |            3.8  |
+| time     |            4.8  |
 Interpretation: ``lag_1`` (the previous day’s value) explains nearly 80 % of the model’s total impurity reduction, so it’s by far the most predictive. The calendar feature time comes in last.
 
 - Why it matters
