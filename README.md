@@ -279,7 +279,7 @@ Random Forest feature importances quantify how much each predictor contributes t
 
 - **Example**
 | Feature  | Importance (\%) |
-|:--------:|:---------------:|
+|----------|-----------------|
 | lag_1    |            78.9 |
 | lag_2    |            9.5  |
 | lag_3    |            3.0  |
